@@ -16,7 +16,6 @@ local pool = nata.new {
   },
   data = {
     world = lovr.physics.newWorld(0, -9.81, 0, false, tags)
-    --world = lovr.physics.newWorld(0,0,0)
   }
 }
 
@@ -39,9 +38,6 @@ end
 function lovr.draw()
   lovr.graphics.transform(mat4(vehicle.collider:getPose()):invert())
   lovr.graphics.setColor(1, 1, 1)
-  --lovr.graphics.sphere(0, 0, 0, 0.1)
-  --lovr.graphics.sphere(0, 1, 0, 0.1)
-  --lovr.graphics.print(lovr.timer.getFPS(), 1, 10, -20, 0.5)
   pool:emit('draw')
   lovr.graphics.setColor(0, 1, 0)
 end

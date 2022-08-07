@@ -7,7 +7,7 @@ function m:init()
     id = 'cc0fe2b7-70bf-4a53-b25d-1a42c8ec2bf9',
     name = 'S-1',
     vehicle_type = 'scooter',
-    initial_position = {0, 30, 2},
+    initial_position = {0, 5, 3},
   }
 end
 
@@ -22,7 +22,6 @@ function m:addToGroup(group_name, e)
     e.collider = self.pool.data.world:newBoxCollider(x, y, z, w, h, d)
     e.collider:setFriction(1)
     e.collider:setMass(10)
-    --e.collider:setOrientation(math.turn/6, 1,1,0)
   end
 end
 
@@ -45,15 +44,15 @@ function m:update(dt)
       e.collider:applyForce(v)
     end
     if lovr.system.isKeyDown('a') then
-      local v = quat(e.collider:getOrientation()):direction()
-      e.collider:applyTorque(0, dt * torque, 0)
+      local v = quat(e.collider:getOrientation()):mul(vec3(0, dt * torque, 0))
+      e.collider:applyTorque(v)
     end
     if lovr.system.isKeyDown('d') then
-      e.collider:applyTorque(0, dt * -torque, 0)
+      local v = quat(e.collider:getOrientation()):mul(vec3(0, dt * -torque, 0))
+      e.collider:applyTorque(v)
     end
     if lovr.system.isKeyDown('space') then
-      local x, y, z = e.collider:getPosition()
-      e.collider:setPose(x, 50, z)
+      e.collider:setPose(0, 5, 3)
     end
   end
 end

@@ -13,6 +13,7 @@ end
 
 
 function m:draw()
+  lovr.graphics.setColor(1,1,1)
   lovr.graphics.skybox(self.cube)
 end
 
